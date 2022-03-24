@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import "../Sucesso/style.css"
 
 function Sucesso() {
@@ -19,7 +21,7 @@ function Sucesso() {
             <p>Nome: João da Silva Sauro</p>
             <p>CPF: 123.456.789-10</p>
         </div>
-        <button className="Sucesso button">Voltar pra Home</button>
+        <Link to="/"><button className="Sucesso button">Voltar pra Home</button></Link>
         </>
     )
 }

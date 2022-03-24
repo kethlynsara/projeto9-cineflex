@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import "../Filmes/style.css"
 
 function Filmes() {
@@ -8,7 +10,8 @@ function Filmes() {
         <>
             <h2 className="Filmes titulo">Selecione o filme</h2>
             <div className="Filmes colecao">
-                {filme} 
+                <Link to="/sessao"><div className="filme"></div></Link>
+                {filme}
             </div>
         </>
     )

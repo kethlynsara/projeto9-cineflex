@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import Footer from "../Footer";
 
 import "../Assento/style.css"
@@ -82,7 +84,7 @@ function Assento() {
                 <p>CPF do comprador:</p>
                 <input type="text" placeholder="Digite seu CPF..."></input>
             </div>
-            <button className="Assento button">Reservar assento(o)s</button>
+            <Link to="/checkout"><button className="Assento button">Reservar assento(o)s</button></Link>
             <Footer />
         </>
     )
