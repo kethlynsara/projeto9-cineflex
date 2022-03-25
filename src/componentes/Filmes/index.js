@@ -13,19 +13,22 @@ function Filmes() {
         const promise = axios.get("https://mock-api.driven.com.br/api/v5/cineflex/movies");
         promise.then((resposta) => {
             const { data } = resposta;
+            console.log(data);
             setFilmes(data);
         });
     }, [])
 
+    
     return (
         <>
             <h2 className="Filmes titulo">Selecione o filme</h2>
             <div className="Filmes colecao">
                 {filmes.map(filme => {
-                    return <Link to="/sessao">
+                    const {id, posterURL, title} = filme;
+                    return <Link to={`/sessao/${id}`} key={id}>
                                <div className="filme-box">
                                     <div className="movie"> 
-                                        <img src={filme.posterURL} alt={filme.title} />
+                                        <img src={posterURL} alt={title} />
                                     </div>
                                 </div>
                            </Link>
