@@ -1,3 +1,6 @@
+main {
+    margin-bottom: 120px;
+}
 .Sessao.titulo {
     font-weight: 400;
     font-size: 24px;
@@ -23,6 +26,7 @@
 
 .Sessao.sessao-info .horarios {
     display: flex;
+    flex-wrap: wrap;
     margin-bottom: 25px;
 }
 
@@ -39,5 +43,6 @@
     border: none;
     border-radius: 3px;
     margin-right: 5px;
+    margin-bottom: 5px;
 }
 

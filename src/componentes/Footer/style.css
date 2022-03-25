@@ -2,21 +2,41 @@ footer {
     background-color: #DFE6ED;
     padding: 14px 10px 14px 10px;
     display: flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 117px;
 }
 
-footer div {
+.Footer .box {
     width: 64px;
     height: 89px;
     background: #FFFFFF;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 2px;
+    margin-top: 14px;
+    margin-left: 10px;
+    padding: 8px;
 }
 
-footer p {
+.Footer p {
     font-weight: 400;
     font-size: 26px;
     line-height: 30px;
     color: #293845;
-    margin-left: 14px;
-    margin-top: 27px;
+    margin-left: 88px;
+    margin-top: -55px;
+   
+}
+
+.Footer .box .movie {
+    width: 48px;
+    height: 72px;
+}
+
+.Footer .box .movie img {
+    width: 48px;
+    height: 72px;
 }

@@ -1,11 +1,15 @@
 import "../Footer/style.css"
 
 
-function Footer() {
+function Footer({imagem, titulo}) {
     return (
-        <footer>
-            <div></div>
-            <p>Enola Holmes</p>
+        <footer className="Footer">
+            <div className="box">
+                <div className="movie">
+                    <img src={imagem} />
+                </div>
+            </div>
+            <p>{titulo}</p>
         </footer>
     )
 }

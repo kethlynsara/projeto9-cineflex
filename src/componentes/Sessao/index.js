@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 
@@ -9,36 +9,78 @@ import Footer from "../Footer"
 
 
 function Sessao() {
-    const { sessaoid } = useParams();    
+    const { sessaoid } = useParams();
+    const [sessaoInfo, setSessaoInfo] = useState([]);
 
-    useEffect(() => {        
+    useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/${sessaoid}/showtimes`);
         promise.then((resposta) => {
             const { data } = resposta;
-            console.log(data);
+            setSessaoInfo(data);
         })
     }, []);
 
-    return (
-        <>
-            <h2 className="Sessao titulo">Escolha o horário</h2>
-            <div className="Sessao sessao-info">
-                <p>Quinta-feira - 24/06/2021</p>
-                <div className="Sessao horarios">
-                    <Link to="/assento"><button className="Sessao horario ">15:00</button></Link>
-                    <Link to="/assento"><button className="Sessao horario ">19:00</button></Link>
+    const { days } = sessaoInfo;
+    
+
+    if (sessaoInfo.length === 0) {
+        return <p>Loading...</p>
+    } else {
+        console.log(sessaoInfo);
+        console.log(days)
+        return (
+            <>
+                <h2 className="Sessao titulo">Escolha o horário</h2>
+
+
+                <div className="Sessao sessao-info">
+                    {days.map(day => {
+                        return (
+                            <>
+                                <p>{day.weekday} - {day.date}</p>
+                                <div className="Sessao horarios" >
+                                    {day.showtimes.map(showtime => {
+                                        return (
+                                            <Link to="/assento"><button className="Sessao horario ">{showtime.name}</button></Link>
+                                        )
+                                        
+
+                                        // for (let i = 0; i < day.showtimes.length; i++) {
+                                        //     return (
+                                        //         <Link to="/assento"><button className="Sessao horario ">{day.showtimes[i].name}</button></Link>
+                                        //     )
+                                        // }
+                                    })}
+                                </div>
+                            </>
+                        );
+                    })}
+
                 </div>
-            </div>
-            <div className="Sessao sessao-info">
-                <p>Sexta-feira - 25/06/2021</p>
-                <div className="Sessao horarios">
-                    <Link to="/assento"><button className="Sessao horario ">15:00</button></Link>
-                    <Link to="/assento"><button className="Sessao horario ">19:00</button></Link>
-                </div>
-            </div>
-            <Footer />
-        </>
-    )
+                <Footer imagem={sessaoInfo.posterURL} titulo={sessaoInfo.title} />
+            </>
+        )
+    }
 }
 
 export default Sessao;
+
+
+
+// {days.map(day => {
+//     return (
+//         <>
+//             <p>{day.weekday} - {day.date}</p>
+//             <div className="Sessao horarios">
+//                 {days.map(day => {
+//                     console.log("showtimes", day.showtimes);
+//                     for (let i = 0; i < day.showtimes.length; i++) {
+//                         return (
+//                             <Link to="/assento"><button className="Sessao horario ">{day.showtimes[i].name}</button></Link>
+//                         )
+//                     }
+//                 })}
+//             </div>
+//         </>
+//     );
+// })}
