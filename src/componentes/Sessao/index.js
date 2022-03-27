@@ -3,10 +3,8 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-
 import "../Sessao/style.css"
 import Footer from "../Footer"
-
 
 function Sessao() {
     const { sessaoid } = useParams();
@@ -20,8 +18,7 @@ function Sessao() {
         })
     }, []);
 
-    const { days } = sessaoInfo;
-    
+    const { days } = sessaoInfo;    
 
     if (sessaoInfo.length === 0) {
         return <p>Loading...</p>
@@ -31,8 +28,6 @@ function Sessao() {
         return (
             <>
                 <h2 className="Sessao titulo">Escolha o horário</h2>
-
-
                 <div className="Sessao sessao-info">
                     {days.map(day => {
                         return (
@@ -41,15 +36,8 @@ function Sessao() {
                                 <div className="Sessao horarios" >
                                     {day.showtimes.map(showtime => {
                                         return (
-                                            <Link to="/assento"><button className="Sessao horario ">{showtime.name}</button></Link>
+                                            <Link to={`/assento/${showtime.id}`}><button className="Sessao horario ">{showtime.name}</button></Link>
                                         )
-                                        
-
-                                        // for (let i = 0; i < day.showtimes.length; i++) {
-                                        //     return (
-                                        //         <Link to="/assento"><button className="Sessao horario ">{day.showtimes[i].name}</button></Link>
-                                        //     )
-                                        // }
                                     })}
                                 </div>
                             </>
@@ -64,23 +52,3 @@ function Sessao() {
 }
 
 export default Sessao;
-
-
-
-// {days.map(day => {
-//     return (
-//         <>
-//             <p>{day.weekday} - {day.date}</p>
-//             <div className="Sessao horarios">
-//                 {days.map(day => {
-//                     console.log("showtimes", day.showtimes);
-//                     for (let i = 0; i < day.showtimes.length; i++) {
-//                         return (
-//                             <Link to="/assento"><button className="Sessao horario ">{day.showtimes[i].name}</button></Link>
-//                         )
-//                     }
-//                 })}
-//             </div>
-//         </>
-//     );
-// })}

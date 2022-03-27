@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 import Footer from "../Footer";
 
@@ -6,7 +8,25 @@ import "../Assento/style.css"
 
 
 function Assento() {
-    const lugares = [<div class="seat"><span>01</span></div>,
+    const {idSessao} = useParams();
+    console.log("idSessao", idSessao);
+
+    const [sessaoChosen, setSessaoChosen] = useState([]);
+
+    useEffect(() => {
+        const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`);
+        promise.then((resposta) => {
+            const { data } = resposta;
+            setSessaoChosen(data);
+        })
+    }, []);
+
+
+    console.log("estado" ,sessaoChosen)
+    
+
+    if (sessaoChosen.length !== 0) {
+        const lugares = [<div class="seat"><span>01</span></div>,
     <div class="seat"><span>02</span></div>,
     <div class="seat"><span>03</span></div>,
     <div class="seat"><span>04</span></div>,
@@ -55,24 +75,24 @@ function Assento() {
     <div class="seat"><span>47</span></div>,
     <div class="seat"><span>48</span></div>,
     <div class="seat"><span>49</span></div>,
-    <div class="seat"><span>50</span></div>,]
+    <div className="seat"><span>50</span></div>]
     return (
         <>
-            <h2 class="Assento titulo">Selecione o(s) assento(s)</h2>
+            <h2 className="Assento titulo">Selecione o(s) assento(s)</h2>
             <div className="Assento assentos">
                 {lugares.map((lugar) => lugar)}
             </div>
             <div className="Assento opcoes">
                 <span>
-                    <div class="seat"></div>
+                    <div className="seat"></div>
                     <p>Selecionado</p>
                 </span>
                 <span>
-                    <div class="seat"></div>
+                    <div className="seat"></div>
                     <p>Disponível</p>
                 </span>
                 <span>
-                    <div class="seat"></div>
+                    <div className="seat"></div>
                     <p>Indisponível</p>
                 </span>
             </div>
@@ -85,9 +105,14 @@ function Assento() {
                 <input type="text" placeholder="Digite seu CPF..."></input>
             </div>
             <Link to="/checkout"><button className="Assento button">Reservar assento(o)s</button></Link>
-            <Footer />
+            <Footer imagem={sessaoChosen.movie.posterURL} titulo={sessaoChosen.movie.title}/>
         </>
     )
+    } else {
+        return <p>Loading...</p>
+    }    
 }
 
 export default Assento;
+
+// imagem={sessaoChosen.movie.posterURL} titulo={sessaoChosen.movie.title}
