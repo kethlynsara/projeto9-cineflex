@@ -19,7 +19,6 @@
     width: 26px;
     height: 26px;
     background: #C3CFD9;
-    border: 1px solid #808F9D;
     box-sizing: border-box;
     border-radius: 12px;
     text-align: center;
@@ -98,4 +97,19 @@
     line-height: 21px;
     letter-spacing: 0.04em;
     color: #FFFFFF;
+}
+
+.Assento.seat.selecionado {
+    background-color: #8DD7CF;
+    border: 1px solid #1AAE9E;
+}
+
+.Assento.seat.disponivel {
+    background-color: #C3CFD9;
+    border: 1px solid #7B8B99;
+}
+
+.Assento.seat.indisponivel {
+    background-color: #FBE192;
+    border: 1px solid #F7C52B;
 }
