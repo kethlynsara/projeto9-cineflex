@@ -1,11 +1,11 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+
 import axios from "axios";
 
 import Footer from "../Footer";
-
-import "../Assento/style.css"
-
+import AssentoSelecionado from "../AssentoSelecionado";
+import "../Assento/style.css";
 
 function Assento() {
     const { idSessao } = useParams();
@@ -24,16 +24,12 @@ function Assento() {
 
     console.log("estado", sessaoChosen)
 
-    const [selected, setSelected] = useState(false);
     if (sessaoChosen.length !== 0) {
         return (
             <>
                 <h2 className="Assento titulo">Selecione o(s) assento(s)</h2>
                 <div className="Assento assentos">
-                    {sessaoChosen.seats.map(seat => <div className="seat" onClick={() => {
-                        setSelected(!selected);
-                        console.log(selected);
-                    }}><span>{seat.name.length === 1 ? `0${seat.name}` : seat.name}</span></div>)}
+                    {sessaoChosen.seats.map(seat => <AssentoSelecionado name={seat.name} disponivel={seat.isAvailable} id={seat.id} />)}
                 </div>
                 <div className="Assento opcoes">
                     <span>
@@ -68,4 +64,18 @@ function Assento() {
 
 export default Assento;
 
-// imagem={sessaoChosen.movie.posterURL} titulo={sessaoChosen.movie.title}
+// {
+//     return <div className={seat.isAvailable === false ? "seat Assento indisponivel" : `seat Assento ${css}`}
+//         onClick={() => {
+//             setSelected(!selected)
+//             console.log(selected)
+//             if (seat.isAvailable === false) alert("Esse assento não está disponível");
+//             else {
+//                 if (!selected) {
+//                     setCss("");
+//                 } else {
+//                     setCss("selecionado");
+//                 }
+//             }
+//         }}><span>{seat.name.length === 1 ? `0${seat.name}` : seat.name}</span></div>
+// }
