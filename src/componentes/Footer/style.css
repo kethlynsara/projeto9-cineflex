@@ -21,13 +21,19 @@ footer {
     padding: 8px;
 }
 
-.Footer p {
+.Footer .movie-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.Footer .movie-info p {
     font-weight: 400;
     font-size: 26px;
     line-height: 30px;
     color: #293845;
     margin-left: 88px;
-    margin-top: -55px;
+    margin-top: -50px;
+    margin-bottom: -8px;
    
 }
 

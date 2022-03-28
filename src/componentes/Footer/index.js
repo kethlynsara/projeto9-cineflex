@@ -1,7 +1,7 @@
 import "../Footer/style.css"
 
 
-function Footer({imagem, titulo}) {
+function Footer({ imagem, titulo, horario, data }) {
     return (
         <footer className="Footer">
             <div className="box">
@@ -9,7 +9,10 @@ function Footer({imagem, titulo}) {
                     <img src={imagem} />
                 </div>
             </div>
-            <p>{titulo}</p>
+            <div className="movie-info">
+                <p>{data} {horario}</p>
+                <p>{titulo}</p>
+            </div>
         </footer>
     )
 }

@@ -95,7 +95,7 @@ function Assento() {
                     </div>
                    <button className="Assento button" type="submit">Reservar assento(o)s</button>
                 </form>                
-                <Footer imagem={sessaoChosen.movie.posterURL} titulo={sessaoChosen.movie.title} />
+                <Footer imagem={sessaoChosen.movie.posterURL} titulo={sessaoChosen.movie.title} data={sessaoChosen.day.date} horario={sessaoChosen.name}/>
             </>
         )
     } else {
