@@ -12,6 +12,8 @@ function Assento() {
     console.log("idSessao", idSessao);
 
     const [sessaoChosen, setSessaoChosen] = useState([]);
+    const [nome, setNome] = useState("");
+    const [cpf, setCPF] = useState("")
 
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`);
@@ -23,6 +25,12 @@ function Assento() {
 
 
     console.log("estado", sessaoChosen)
+
+    function submitDados(event) {
+        event.preventDefault()
+        alert(nome);
+        alert(cpf);
+    }
 
     if (sessaoChosen.length !== 0) {
         return (
@@ -45,15 +53,25 @@ function Assento() {
                         <p>Indisponível</p>
                     </span>
                 </div>
-                <div className="Assento nome-user info-user">
-                    <p>Nome do comprador:</p>
-                    <input type="text" placeholder="Digite seu nome..."></input>
-                </div>
-                <div className="Assento cpf-user info-user" >
-                    <p>CPF do comprador:</p>
-                    <input type="text" placeholder="Digite seu CPF..."></input>
-                </div>
-                <Link to="/checkout"><button className="Assento button">Reservar assento(o)s</button></Link>
+                <form onSubmit={submitDados}>
+                    <div className="Assento nome-user info-user">
+                        <p>Nome do comprador:</p>
+                        <input type="text"
+                            placeholder="Digite seu nome..."
+                            value={nome}
+                            onChange={(e) => setNome(e.target.value)}
+                        ></input>
+                    </div>
+                    <div className="Assento cpf-user info-user" >
+                        <p>CPF do comprador:</p>
+                        <input type="text"
+                            placeholder="Digite seu CPF..."
+                            value={cpf}
+                            onChange={(e) => setCPF(e.target.value)}
+                        ></input>
+                    </div>
+                   <button className="Assento button" type="submit">Reservar assento(o)s</button>
+                </form>                
                 <Footer imagem={sessaoChosen.movie.posterURL} titulo={sessaoChosen.movie.title} />
             </>
         )
