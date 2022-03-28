@@ -5,3 +5,10 @@
 body {
     font-family: 'Roboto', sans-serif;
 }
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 300px;
+}

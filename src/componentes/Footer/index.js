@@ -11,7 +11,7 @@ function Footer({ imagem, titulo, horario, data }) {
             </div>
             <div className="movie-info">
                 <p>{data} {horario}</p>
-                <p>{titulo}</p>
+                <p className="p2">{titulo}</p>
             </div>
         </footer>
     )

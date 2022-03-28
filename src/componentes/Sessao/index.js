@@ -21,7 +21,7 @@ function Sessao() {
     const { days } = sessaoInfo;    
 
     if (sessaoInfo.length === 0) {
-        return <p>Loading...</p>
+        return <div className="loading"><img src="https://static.wixstatic.com/media/29698f_30edec9e3734430696d4c8dd105ec70c~mv2.gif" /></div>
     } else {
         console.log(sessaoInfo);
         console.log(days)

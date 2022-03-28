@@ -24,19 +24,22 @@ footer {
 .Footer .movie-info {
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .Footer .movie-info p {
     font-weight: 400;
-    font-size: 26px;
+    font-size: 18px;
     line-height: 30px;
     color: #293845;
     margin-left: 88px;
-    margin-top: -50px;
-    margin-bottom: -8px;
+    margin-top: -70px;
+    /*margin-bottom: -8px; */
    
 }
-
+.Footer .movie-info .p2 {
+    margin-top: -80px;
+}
 .Footer .box .movie {
     width: 48px;
     height: 72px;
@@ -46,3 +49,4 @@ footer {
     width: 48px;
     height: 72px;
 }
+

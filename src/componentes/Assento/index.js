@@ -1,4 +1,4 @@
-import { Link, Navigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -31,28 +31,26 @@ function Assento() {
     const navigate = useNavigate();
 
     function submitDados(event) {
-        event.preventDefault()
+        event.preventDefault();
 
-        // const dadosSessao = {
-        //     ids: idsArray,
-        //     titulo: sessaoChosen.movie.title,
-        //     horario: sessaoChosen.name,
-        //     data: sessaoChosen.day.date,
-        //     nome: nome,
-        //     cpf: cpf
-        // }
-        
-        navigate("/checkout", {state: 
-            {
-                ids: idsArray,
-                titulo: sessaoChosen.movie.title,
-                horario: sessaoChosen.name,
-                data: sessaoChosen.day.date,
-                nome: nome,
-                cpf: cpf
-            }});
-        alert(nome);
-        alert(cpf);
+        const promise = axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", {
+            ids: idsArray,
+            name: nome,
+            cpf: cpf
+        });
+        promise.then(() => {
+            navigate("/checkout", {state: 
+                {
+                    ids: idsArray,
+                    titulo: sessaoChosen.movie.title,
+                    horario: sessaoChosen.name,
+                    data: sessaoChosen.day.date,
+                    nome: nome,
+                    cpf: cpf
+                }});
+                console.log("deu bom")
+        });
+        promise.catch(() => console.log("deu ruim"));      
     }
 
     if (sessaoChosen.length !== 0) {
@@ -60,7 +58,7 @@ function Assento() {
             <>
                 <h2 className="Assento titulo">Selecione o(s) assento(s)</h2>
                 <div className="Assento assentos">
-                    {sessaoChosen.seats.map(seat => <AssentoSelecionado name={seat.name} disponivel={seat.isAvailable} id={seat.id} idsArray={idsArray} setIdsArray={setIdsArray}/>)}
+                    {sessaoChosen.seats.map(seat => <AssentoSelecionado name={seat.name} disponivel={seat.isAvailable} id={seat.name} idsArray={idsArray} setIdsArray={setIdsArray}/>)}
                 </div>
                 <div className="Assento opcoes">
                     <span>
@@ -99,24 +97,8 @@ function Assento() {
             </>
         )
     } else {
-        return <p>Loading...</p>
+        return <div className="loading"><img src="https://static.wixstatic.com/media/29698f_30edec9e3734430696d4c8dd105ec70c~mv2.gif" /></div>
     }
 }
 
 export default Assento;
-
-// {
-//     return <div className={seat.isAvailable === false ? "seat Assento indisponivel" : `seat Assento ${css}`}
-//         onClick={() => {
-//             setSelected(!selected)
-//             console.log(selected)
-//             if (seat.isAvailable === false) alert("Esse assento não está disponível");
-//             else {
-//                 if (!selected) {
-//                     setCss("");
-//                 } else {
-//                     setCss("selecionado");
-//                 }
-//             }
-//         }}><span>{seat.name.length === 1 ? `0${seat.name}` : seat.name}</span></div>
-// }

@@ -17,7 +17,8 @@ function Sucesso() {
         </div>
         <div className="Sucesso sessao-info">
             <h3>Ingressos</h3>
-            <p>{state.ids.map(id => id)}</p>
+            {state.ids.map(id => <p key={id}>Assento {id}</p>)}
+            
         </div>
         <div className="Sucesso sessao-info">
             <h3>Comprador</h3>
