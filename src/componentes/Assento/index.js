@@ -1,5 +1,6 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
@@ -14,6 +15,8 @@ function Assento() {
     const [sessaoChosen, setSessaoChosen] = useState([]);
     const [nome, setNome] = useState("");
     const [cpf, setCPF] = useState("")
+    const [idsArray, setIdsArray] = useState([]);
+
 
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`);
@@ -25,9 +28,29 @@ function Assento() {
 
 
     console.log("estado", sessaoChosen)
+    const navigate = useNavigate();
 
     function submitDados(event) {
         event.preventDefault()
+
+        // const dadosSessao = {
+        //     ids: idsArray,
+        //     titulo: sessaoChosen.movie.title,
+        //     horario: sessaoChosen.name,
+        //     data: sessaoChosen.day.date,
+        //     nome: nome,
+        //     cpf: cpf
+        // }
+        
+        navigate("/checkout", {state: 
+            {
+                ids: idsArray,
+                titulo: sessaoChosen.movie.title,
+                horario: sessaoChosen.name,
+                data: sessaoChosen.day.date,
+                nome: nome,
+                cpf: cpf
+            }});
         alert(nome);
         alert(cpf);
     }
@@ -37,7 +60,7 @@ function Assento() {
             <>
                 <h2 className="Assento titulo">Selecione o(s) assento(s)</h2>
                 <div className="Assento assentos">
-                    {sessaoChosen.seats.map(seat => <AssentoSelecionado name={seat.name} disponivel={seat.isAvailable} id={seat.id} />)}
+                    {sessaoChosen.seats.map(seat => <AssentoSelecionado name={seat.name} disponivel={seat.isAvailable} id={seat.id} idsArray={idsArray} setIdsArray={setIdsArray}/>)}
                 </div>
                 <div className="Assento opcoes">
                     <span>
